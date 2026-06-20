@@ -35,25 +35,25 @@ function authRole(role) {
 //REDIRECT TO THE LOGIN MICROSERVICE
 app.use('/booking',authToken, authRole('customer'), (req, res) => {
     console.log("INSIDE API GATEWAY BOOKING ROUTE")
-    proxy.web(req, res, { target: 'http://localhost:5002' });
+    proxy.web(req, res, { target: 'http://172.31.29.58:5002' });
 })
 
 //REDIRECT TO THE FLIGHT MICROSERVICE
 app.use('/payment', authToken, authRole('customer'),(req, res) => {
     console.log("INSIDE API GATEWAY PAYMENT ROUTE")
-    proxy.web(req, res, { target: 'http://localhost:5003' });
+    proxy.web(req, res, { target: 'http://172.31.29.58:5003' });
 })
 
 //REDIRECT TO THE LOGIN(Authentication) MICROSERVICE
 app.use('/auth', (req, res) => {
-    proxy.web(req, res, { target: 'http://localhost:5000' });
+    proxy.web(req, res, { target: 'http://172.31.82.70:5000' });
 })
 
 //REDIRECT TO THE FLIGHT MICROSERVICE
 app.use('/flight',authToken, authRole('admin'), (req, res) => {
     console.log("INSIDE API GATEWAY FLIGHT ROUTE")
     proxy.web(req, res, {
-        target: 'http://localhost:5001'
+        target: 'http://172.31.82.70:5001'
     });
 });
 
