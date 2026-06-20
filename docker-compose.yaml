@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+
+  gateway:
+    container_name: gateway_container
+    build:
+      context: ./API_Gateway_Microservice
+      dockerfile: Dockerfile
+    hostname: gateway
+    ports:
+      - "4000:4000"
+    restart: on-failure
+    depends_on:
+      - auth
+      - flight
+      - booking
+      - payment
+
+  auth:
+    container_name: auth_container
+    build:
+      context: ./Registration-Login_Microservice
+      dockerfile: Dockerfile
+    hostname: auth
+    ports:
+      - "5000:5000"
+    restart: on-failure
+
+  flight:
+    container_name: flight_container
+    build:
+      context: ./Flight_Microservice
+      dockerfile: Dockerfile
+    hostname: flight
+    ports:
+      - "5001:5001"
+    restart: on-failure
+
+  booking:
+    container_name: booking_container
+    build:
+      context: ./Booking_Microservice
+      dockerfile: Dockerfile
+    hostname: booking
+    ports:
+      - "5002:5002"
+    restart: on-failure
+
+  payment:
+    container_name: payment_container
+    build:
+      context: ./Payment_Microservice
+      dockerfile: Dockerfile
+    hostname: payment
+    ports:
+      - "5003:5003"
+    restart: on-failure
+
+  nginx:
+    container_name: nginx_container
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    hostname: nginx
+    ports:
+      - "80:80"
+    restart: on-failure
+    depends_on:
+      - gateway
