@@ -20,7 +20,7 @@ services:
   auth:
     container_name: auth_container
     build:
-      context: ./Registration-Login_Microservice
+      context: ./Registeration-Login_Microservice
       dockerfile: Dockerfile
     hostname: auth
     ports:
