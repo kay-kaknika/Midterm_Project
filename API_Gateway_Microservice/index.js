@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express()
+const os = require('os');
 
 //USE PROXY SERVER TO REDIRECT THE INCOMMING REQUEST
 const httpProxy = require('http-proxy')
@@ -54,6 +55,15 @@ app.use('/flight',authToken, authRole('admin'), (req, res) => {
     console.log("INSIDE API GATEWAY FLIGHT ROUTE")
     proxy.web(req, res, {
         target: 'http://172.31.82.70:5001'
+    });
+});
+
+app.get("/", (req, res) => {
+    res.json({
+        server: "API Gateway",
+        hostname: os.hostname(),
+        message: "Load Balancer Working",
+        time: new Date()
     });
 });
 

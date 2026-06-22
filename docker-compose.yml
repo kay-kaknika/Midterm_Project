@@ -5,9 +5,8 @@ services:
   gateway:
     container_name: gateway_container
     build:
-      context: ./API_Gateway_Microservice
+      context: ./API_Gateway_Microserver
       dockerfile: Dockerfile
-    hostname: gateway
     ports:
       - "4000:4000"
     restart: on-failure
@@ -22,7 +21,6 @@ services:
     build:
       context: ./Registeration-Login_Microservice
       dockerfile: Dockerfile
-    hostname: auth
     ports:
       - "5000:5000"
     restart: on-failure
@@ -32,7 +30,6 @@ services:
     build:
       context: ./Flight_Microservice
       dockerfile: Dockerfile
-    hostname: flight
     ports:
       - "5001:5001"
     restart: on-failure
@@ -42,7 +39,6 @@ services:
     build:
       context: ./Booking_Microservice
       dockerfile: Dockerfile
-    hostname: booking
     ports:
       - "5002:5002"
     restart: on-failure
@@ -52,19 +48,6 @@ services:
     build:
       context: ./Payment_Microservice
       dockerfile: Dockerfile
-    hostname: payment
     ports:
       - "5003:5003"
     restart: on-failure
-
-  nginx:
-    container_name: nginx_container
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    hostname: nginx
-    ports:
-      - "80:80"
-    restart: on-failure
-    depends_on:
-      - gateway
