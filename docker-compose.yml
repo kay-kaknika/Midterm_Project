@@ -5,7 +5,7 @@ services:
   gateway:
     container_name: gateway_container
     build:
-      context: ./API_Gateway_Microserver
+      context: ./API_Gateway_Microservice
       dockerfile: Dockerfile
     ports:
       - "4000:4000"
