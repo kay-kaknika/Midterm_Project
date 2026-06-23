@@ -15,7 +15,7 @@ RUN npm ci --omit=dev
 COPY . .
 
 # Document the port the application listens on
-EXPOSE 5001
+EXPOSE 4000
 
 # Run the container as a non-root user for security
 USER node
